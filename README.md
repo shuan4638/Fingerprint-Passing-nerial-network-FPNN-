@@ -15,7 +15,7 @@ All the chemical decription were done by rdkit. Please use conda to install rdki
 conda install -c conda-forge rdkit
 ```
 
-## Authors
+## Author
 This code was written by Shuan Chen (PhD candidate of KAIST CBE) in 2019 for chemical GCN practice.
 
 ## Contributing
