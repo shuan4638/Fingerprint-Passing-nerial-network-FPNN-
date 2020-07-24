@@ -1,5 +1,5 @@
 # FP2GRAPH
-Predicting chemical property using descriptors from Morgan Fingerprints to graph convolutional neural network (GCN)
+Predicting chemical property using descriptors from Morgan Fingerprints to graph convolutional neural network (GCN).
 
 HIV dataset was used to demo classification task and ESOL dataset was used to demo regression task.
 
@@ -25,4 +25,4 @@ This work was inspired by 2 papers:
 
 1. "FP2VEC: A new molecular featurizer for learning molecular properties", Bioinformatics, 35 (23), pp. 4979-4985, 2019
 
-2. "Convolutional networks on graphs for learning molecular fingerprints", Neural information processing systems, pp. 2224–2232, 2015.
+2. "Convolutional networks on graphs for learning molecular fingerprints", Neural information processing systems, pp. 2224–2232, 2015
