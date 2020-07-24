@@ -23,7 +23,7 @@ def sum_channel(layer):
 def root_mean_squared_error(y_true, y_pred):
     return K.sqrt(K.mean(K.square(y_pred - y_true), axis=-1))
     
-def gfp2vec_r(input_dim = bit_size, output_dim = embedding_size, input_length = input_length, filter_num = filter_num, pooling = 'sum'):
+def AGCN(input_dim = bit_size, output_dim = embedding_size, input_length = input_length, filter_num = filter_num, pooling = 'sum'):
     
     G = Input(shape=(input_length, input_length))
     X_in = Input(shape=(input_length,))
@@ -48,7 +48,7 @@ def gfp2vec_r(input_dim = bit_size, output_dim = embedding_size, input_length = 
     return model
 
 
-def GCN_r(input_dim = bit_size, output_dim = embedding_size, input_length = input_length, filter_num = filter_num, pooling = 'sum'):
+def GCN(input_dim = bit_size, output_dim = embedding_size, input_length = input_length, filter_num = filter_num, pooling = 'sum'):
     
     G = Input(shape=(input_length, input_length))
     X_in = Input(shape=(input_length,))
@@ -73,14 +73,14 @@ def GCN_r(input_dim = bit_size, output_dim = embedding_size, input_length = inpu
     return model
 
 
-def train_gfp2vec_r(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'max'):
-    model = gfp2vec_r(pooling = pooling)
+def train_agcn(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'max'):
+    model = AGCN(pooling = pooling)
     hist = model.fit(train_G, train_y, batch_size=150, epochs=300, validation_data=(valid_G, valid_y), verbose=0)
     loss, mae, mse = model.evaluate(valid_G, valid_y, verbose=0)
     return [loss, mae, mse]
 
-def train_gcn_r(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'max'):
-    model = GCN_r(pooling = pooling)
+def train_gcn(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'max'):
+    model = GCN(pooling = pooling)
     hist = model.fit(train_G, train_y, batch_size=150, epochs=300, validation_data=(valid_G, valid_y), verbose=0)
     loss, mae, mse = model.evaluate(valid_G, valid_y, verbose=0)
     return [loss, mae, mse]
@@ -90,28 +90,28 @@ def split_data(data_X, data_y, data_A, data_A_):
     train_X, valid_X, train_y, valid_y, train_A, valid_A, train_A_, valid_A_ = train_test_split(train_X, train_y, train_A, train_A_, test_size=0.1111)
     return train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A, train_A_, test_A_, valid_A_
 
-def train_atom_sum_r(train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A):
-    ##gfp2vec
+def train_atom_sum(train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A):
+    ##agcn
     train_G = [train_X, train_A]
     test_G = [test_X, test_A]
     valid_G = [valid_X, valid_A]
-    result = train_gfp2vec_r(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'sum')
+    result = train_agcn(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'sum')
     mse = result[2]
     return mse
 
-def train_file_r(train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A, train_A_, test_A_, valid_A_):
-    ##gfp2vec
+def train_file(train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A, train_A_, test_A_, valid_A_):
+    ##agcn
     train_G = [train_X, train_A]
     test_G = [test_X, test_A]
     valid_G = [valid_X, valid_A]
-    result1_1 = train_gfp2vec_r(train_G, test_G, train_y, test_y, valid_G, valid_y)
-    result1_2 = train_gfp2vec_r(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'sum')
+    result1_1 = train_agcn(train_G, test_G, train_y, test_y, valid_G, valid_y)
+    result1_2 = train_agcn(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'sum')
     ##gcn
     train_G_ = [train_X, train_A_]
     test_G_ = [test_X, test_A_]
     valid_G_ = [valid_X, valid_A_]
-    result2_1 = train_gcn_r(train_G_, test_G_, train_y, test_y, valid_G_, valid_y)
-    result2_2 = train_gcn_r(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'sum')
+    result2_1 = train_gcn(train_G_, test_G_, train_y, test_y, valid_G_, valid_y)
+    result2_2 = train_gcn(train_G, test_G, train_y, test_y, valid_G, valid_y, pooling = 'sum')
     print ('GFP : max_pool: %s, sum_pool: %s  \n GCN : max_pool: %s, sum_pool: %s' % (result1_1, result1_2, result2_1, result2_2))
     mses = [result1_1[2], result1_2[2], result2_1[2], result2_2[2]]
 
