@@ -4,7 +4,7 @@ From Morgan Fingerprints to graph constitutional neural network
 ## AtomConvolution
 
 In addition to graph convolution, this code also performed "atom convolution" to more closely learn the chemical behavior.
-<img src="https://github.com/shuan4638/FP2GRAPH/blob/master/Atomconv.jpg" width="300">
+<img src="https://github.com/shuan4638/FP2GRAPH/blob/master/Atomconv.jpg">
 ## Installation
 
 All the chemical decription were done by rdkit. Please use conda to install rdkit.
