@@ -1,3 +1,5 @@
+from __future__ import print_function, division
+
 import numpy as np
 import pandas as pd
 from sklearn import metrics
@@ -5,7 +7,6 @@ from sklearn.model_selection import train_test_split
 
 from keras.layers import Input, Dense, Dropout,Embedding, BatchNormalization, Lambda, MaxPooling1D, Flatten
 from keras import backend as K
-from __future__ import print_function, division
 from keras.layers.convolutional import Conv1D
 from keras.models import Model
 from keras.regularizers import l2
