@@ -1,5 +1,7 @@
 # FP2GRAPH
-From Morgan Fingerprints to graph constitutional neural network
+Predicting chemical property using descriptors from Morgan Fingerprints to graph convolutional neural network (GCN)
+
+HIV dataset was used to demo classification task and ESOL dataset was used to demo regression task.
 
 ## AtomConvolution
 
