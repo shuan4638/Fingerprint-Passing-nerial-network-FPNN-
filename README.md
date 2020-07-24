@@ -23,6 +23,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 This work was inspired by 2 papers:
 
-1. "FP2VEC: A new molecular featurizer for learning molecular properties", Bioinformatics, 35 (23), pp. 4979-4985, 2019
+1. "Convolutional networks on graphs for learning molecular fingerprints", Neural information processing systems, pp. 2224–2232, 2015
 
-2. "Convolutional networks on graphs for learning molecular fingerprints", Neural information processing systems, pp. 2224–2232, 2015
+2. "FP2VEC: A new molecular featurizer for learning molecular properties", Bioinformatics, 35 (23), pp. 4979-4985, 2019
+
