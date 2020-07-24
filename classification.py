@@ -21,7 +21,7 @@ filter_num = 30
 def sum_channel(layer):
     return K.sum(layer, axis = 1)
     
-def AGCN(input_dim = bit_size, output_dim = embedding_size, input_length = input_length, filter_num = filter_num, pooling = 'max'):
+def gfp2vec(input_dim = bit_size, output_dim = embedding_size, input_length = input_length, filter_num = filter_num, pooling = 'max'):
     
     G = Input(shape=(input_length, input_length))
     X_in = Input(shape=(input_length,))
@@ -71,8 +71,8 @@ def GCN(input_dim = bit_size, output_dim = embedding_size, input_length = input_
     
     return model
 
-def train_agcn(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'max'):
-    model = AGCN(pooling = pooling)
+def train_gfp2vec(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'max'):
+    model = gfp2vec(pooling = pooling)
     hist = model.fit(train_G, train_y, batch_size=100, epochs=300, validation_data=(valid_G, valid_y), verbose=0)
     pred_y = model.predict(valid_G) 
     accuracy = metrics.roc_auc_score(valid_y, pred_y)
@@ -92,12 +92,12 @@ def split_data(data_X, data_y, data_A, data_A_):
     return train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A, train_A_, test_A_, valid_A_
 
 def train_file(train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A, train_A_, test_A_, valid_A_):
-    ##AGCN
+    ##gfp2vec
     train_G = [train_X, train_A]
     test_G = [test_X, test_A]
     valid_G = [valid_X, valid_A]
-    AUC1 = train_agcn(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'max')
-    AUC2 = train_agcn(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'sum')
+    AUC1 = train_gfp2vec(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'max')
+    AUC2 = train_gfp2vec(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'sum')
     ##gcn
     train_G_ = [train_X, train_A_]
     test_G_ = [test_X, test_A_]
@@ -108,11 +108,11 @@ def train_file(train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test
     return [AUC1, AUC2, AUC3, AUC4]
 
 def train_atom_sum(train_X, test_X, valid_X, train_y, test_y, valid_y, train_A, test_A, valid_A):
-    ##AGCN
+    ##gfp2vec
     train_G = [train_X, train_A]
     test_G = [test_X, test_A]
     valid_G = [valid_X, valid_A]
-    AUC = train_agcn(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'sum')
+    AUC = train_gfp2vec(train_G, test_G, valid_G, valid_y, train_y, test_y, pooling = 'sum')
     print (AUC)
     return AUC
 
