@@ -1,5 +1,5 @@
-# FP2GRAPH
-Predicting chemical property using descriptors from Morgan Fingerprints to graph convolutional neural network (GCN).
+# FP2MP
+Predicting chemical property using Morgan Fingerprints to build message passing neural network (MPNN).
 
 HIV dataset was used to demo classification task and ESOL dataset was used to demo regression task.
 
