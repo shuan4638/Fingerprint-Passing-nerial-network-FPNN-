@@ -1,4 +1,4 @@
-# F-MPNN
+# Fingprint passing neural network (FPNN)
 Predicting chemical property using Morgan Fingerprints to build message passing neural network (MPNN).
 
 HIV dataset was used to demo classification task and ESOL dataset was used to demo regression task.
