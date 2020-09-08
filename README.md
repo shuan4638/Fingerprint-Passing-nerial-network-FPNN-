@@ -18,10 +18,10 @@ conda install -c conda-forge rdkit
 ## Author
 This code was written by Shuan Chen (PhD candidate of KAIST CBE) in 2019 for chemical GCN practice.
 
-## Contributing
+## Acknowledgement
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-This work was inspired by 2 papers:
+This work was heavily inspired by 2 papers:
 
 1. "Convolutional networks on graphs for learning molecular fingerprints", Neural information processing systems, pp. 2224–2232, 2015
 
